@@ -58,7 +58,22 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = 'rock'
-const computerSelection = 'ScisSors'
+function play() {
+    let playerSelection;
+    let roundResult;
+    let score = 0;
 
-console.log(playRound(playerSelection, computerSelection))
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Rock, Paper or Scissors?")
+        roundResult = playRound(playerSelection, getComputerChoice())
+        console.log(roundResult)
+        
+        if(roundResult.startsWith('You Win!')) {
+            score++
+        }
+    }
+
+    console.log(`Score: ${score}`)
+}
+
+play();
