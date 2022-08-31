@@ -59,3 +59,16 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+const buttons = document.querySelectorAll('button')
+
+const result = document.createElement('h3')
+result.classList.add('result')
+const match_result = document.querySelector('.match-result')
+match_result.appendChild(result)
+
+buttons.forEach(button => {
+    button.addEventListener('click', e => {
+        const playerSelection = e.target.dataset.key
+        result.textContent = playRound(playerSelection, getComputerChoice())
+    })
+})

@@ -6,9 +6,16 @@ button {
 
 span.emoji {
     font-size: 100px;
+    display: inline-block;
+}
+
+/* Applied to the match result text */
+.result {
+    text-align: center;
 }
 
 .player-options {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
