@@ -1,0 +1,14 @@
+button {
+    padding: 0;
+    border: 0;
+    background-color: white;
+}
+
+span.emoji {
+    font-size: 100px;
+}
+
+.player-options {
+    display: flex;
+    justify-content: center;
+}

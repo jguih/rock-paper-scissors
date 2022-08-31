@@ -9,6 +9,7 @@ function getComputerChoice() {
     } else return 'Scissors'
 }
 
+// Plays a round and check who won
 function playRound(playerSelection, computerSelection) {
     let playerSel = playerSelection.toUpperCase();
     let computerSel = computerSelection.toUpperCase();
@@ -58,22 +59,3 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function play() {
-    let playerSelection;
-    let roundResult;
-    let score = 0;
-
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Rock, Paper or Scissors?")
-        roundResult = playRound(playerSelection, getComputerChoice())
-        console.log(roundResult)
-        
-        if(roundResult.startsWith('You Win!')) {
-            score++
-        }
-    }
-
-    console.log(`Score: ${score}`)
-}
-
-play();
