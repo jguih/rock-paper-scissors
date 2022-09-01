@@ -3,10 +3,10 @@ function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 4) + 1
 
     if(randomNumber === 1) {
-        return 'Rock'
+        return 'rock'
     } else if(randomNumber === 2) {
-        return 'Paper'
-    } else return 'Scissors'
+        return 'paper'
+    } else return 'scissors'
 }
 
 // Plays a round and check who won
@@ -18,13 +18,13 @@ function playRound(playerSelection, computerSelection) {
         case 'ROCK': 
             switch (computerSel) {
                 case 'PAPER':
-                    return 'You Lose! Paper beats Rock'
+                    return [-1, 'You Lose! Paper beats Rock']
                     break;
                 case 'ROCK':
-                    return 'It\'s a Tie'
+                    return [0, 'It\'s a Tie']
                     break;
                 case 'SCISSORS':
-                    return 'You Win! Rock beats Scissors'
+                    return [1, 'You Win! Rock beats Scissors']
                     break;
             }
             break;
@@ -32,13 +32,13 @@ function playRound(playerSelection, computerSelection) {
         case 'PAPER':
             switch (computerSel) {
                 case 'SCISSORS':
-                    return 'You Lose! Scissors beats Paper'
+                    return [-1, 'You Lose! Scissors beats Paper']
                     break;
                 case 'PAPER':
-                    return 'It\'s a Tie'
+                    return [0, 'It\'s a Tie']
                     break;
                 case 'ROCK':
-                    return 'You Win! Paper beats Rock'
+                    return [1, 'You Win! Paper beats Rock']
                     break;
             }
             break;
@@ -46,13 +46,13 @@ function playRound(playerSelection, computerSelection) {
         case 'SCISSORS':
             switch (computerSel) {
                 case 'ROCK':
-                    return 'You Lose! Rocks beats Scissors'
+                    return [-1, 'You Lose! Rocks beats Scissors']
                     break;
                 case 'SCISSORS':
-                    return 'It\'s a Tie'
+                    return [0, 'It\'s a Tie']
                     break;
                 case 'PAPER':
-                    return 'You Win! Scissors beats Paper'
+                    return [1, 'You Win! Scissors beats Paper']
                     break;
             }
             break;
@@ -62,21 +62,18 @@ function playRound(playerSelection, computerSelection) {
 // Select all player buttons
 const allPlayerEmojiButtons = document.querySelectorAll('.player-options button')
 
-// Create an h3 node for displaying results
-const result = document.createElement('h3')
-result.classList.add('result')
-
-// Gets the div that displays the result and append the h3
-const match_result = document.querySelector('.match-result')
-match_result.appendChild(result)
-
 const handlePlayerEmojiClicks = function() {
-    // Gets the data-key from the player's selection
-    const playerSelection = this.dataset.key
-    // Play a round and update the result
-    result.textContent = playRound(playerSelection, getComputerChoice())
+    // Gets the player and computer choice
+    const playerChoice = this.dataset.key
+    const computerChoice = getComputerChoice()
+    const matchResult = playRound(playerChoice, computerChoice)
     // Gets the span that contains the button's emoji
     const thisButtonEmoji = this.firstChild
+    
+    showComputerChoice(computerChoice)
+    showResult(matchResult)
+    updateScore(matchResult)
+
     // Highlights the selected emoji
     thisButtonEmoji.classList.remove('emoji')
     thisButtonEmoji.classList.add('player-choice')
@@ -95,3 +92,61 @@ const handlePlayerEmojiClicks = function() {
 allPlayerEmojiButtons.forEach( button => {
     button.addEventListener('click', handlePlayerEmojiClicks) 
 })
+
+// Gets all computer buttons
+const allComputerEmojiButtons = document.querySelectorAll('.computer-options button')
+
+function showComputerChoice(computerChoice) {
+    allComputerEmojiButtons.forEach(button => {
+        // Gets the span child that has the emoji
+        const buttonEmoji = button.firstChild
+        // Highlights the computer choice
+        if((button.dataset.key).toUpperCase() === (computerChoice).toUpperCase()) {
+            buttonEmoji.classList.remove('emoji')
+            buttonEmoji.classList.add('computer-choice')
+        } else if(buttonEmoji.classList.contains('computer-choice')) {
+            buttonEmoji.classList.remove('computer-choice')
+            buttonEmoji.classList.add('emoji')
+        }
+    })
+}
+
+// Create an h3 node for displaying results
+const result = document.createElement('h3')
+result.classList.add('result')
+
+// Gets the div that displays the result and append the h3
+const match_result = document.querySelector('.match-result')
+match_result.appendChild(result)
+
+// Update the h3 that displays the result
+function showResult(matchResult) {
+    result.textContent = matchResult[1]
+}
+
+// Store computer and player score
+let playerScore = 0
+let computerScore = 0
+
+// Calculates the score
+function score(matchResult) {
+    switch(matchResult[0]) {
+        case 1:
+            playerScore++
+            break;
+        case 0:
+            break;
+        case -1:
+            computerScore++
+            break;
+    }
+}
+
+// Update the score on screen
+function updateScore(matchResult) {
+    score(matchResult)
+    const playerScoreNode = document.querySelector('.player-score')
+    const computerScoreNode = document.querySelector('.computer-score')
+    playerScoreNode.textContent = playerScore
+    computerScoreNode.textContent = computerScore
+}

@@ -19,25 +19,31 @@ button {
     background-color: inherit;
 }
 
-.emoji {
+.emoji,
+.player-choice,
+.computer-choice {
     font-size: 100px;
     display: inline-block;
+}
+
+.emoji {
     text-shadow: 3px 3px 4px black;
 }
 
-.emoji:hover {
-    text-shadow: 3px 3px 4px white;
-}
-
+/* Highlights the player emoji button when pressed */
 .player-choice {
-    font-size: 100px;
-    display: inline-block;
     text-shadow: 3px 3px 4px red;
 }
 
 /* Highlights the emoji chosen by the computer */
 .computer-choice {
     text-shadow: 3px 3px 4px blue;
+}
+
+.emoji:hover,
+.player-choice:hover,
+.computer-choice:hover {
+    text-shadow: 3px 3px 4px white;
 }
 
 /* Applied to the match result text */
