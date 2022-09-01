@@ -59,10 +59,14 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const buttons = document.querySelectorAll('button')
+// Select all buttons
+const buttons = document.querySelectorAll('.player-options button')
 
+// Create an h3 element for displaying results
 const result = document.createElement('h3')
 result.classList.add('result')
+
+// Gets the div that displays the result and append the h3
 const match_result = document.querySelector('.match-result')
 match_result.appendChild(result)
 

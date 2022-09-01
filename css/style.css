@@ -1,12 +1,32 @@
+h3, p {
+    margin: 15px 15px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
 button {
     padding: 0;
     border: 0;
-    background-color: white;
+    background-color: inherit;
 }
 
 span.emoji {
     font-size: 100px;
     display: inline-block;
+    text-shadow: 3px 3px 4px black;
+}
+
+span.emoji:hover {
+    text-shadow: 3px 3px 4px white;
 }
 
 /* Applied to the match result text */
@@ -14,8 +34,30 @@ span.emoji {
     text-align: center;
 }
 
-.player-options {
+.game {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+.player-options,
+.computer-options {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.player,
+.computer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    width: fit-content;
+    background-color: gray;
+    border: 5px solid gray;
+    border-radius: 10px;
 }
