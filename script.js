@@ -59,10 +59,10 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Select all buttons
-const buttons = document.querySelectorAll('.player-options button')
+// Select all player buttons
+const allPlayerEmojiButtons = document.querySelectorAll('.player-options button')
 
-// Create an h3 element for displaying results
+// Create an h3 node for displaying results
 const result = document.createElement('h3')
 result.classList.add('result')
 
@@ -70,9 +70,28 @@ result.classList.add('result')
 const match_result = document.querySelector('.match-result')
 match_result.appendChild(result)
 
-buttons.forEach(button => {
-    button.addEventListener('click', e => {
-        const playerSelection = e.target.dataset.key
-        result.textContent = playRound(playerSelection, getComputerChoice())
+const handlePlayerEmojiClicks = function() {
+    // Gets the data-key from the player's selection
+    const playerSelection = this.dataset.key
+    // Play a round and update the result
+    result.textContent = playRound(playerSelection, getComputerChoice())
+    // Gets the span that contains the button's emoji
+    const thisButtonEmoji = this.firstChild
+    // Highlights the selected emoji
+    thisButtonEmoji.classList.remove('emoji')
+    thisButtonEmoji.classList.add('player-choice')
+    // Make sure that there's only one highlighted emoji
+    allPlayerEmojiButtons.forEach(button => {
+        // Gets the span that contains the button's emoji
+        const buttonEmoji = button.firstChild
+        // Check if there are other highlighted emojis
+        if (thisButtonEmoji !== buttonEmoji && buttonEmoji.classList.contains('player-choice')) {
+            buttonEmoji.classList.remove('player-choice')
+            buttonEmoji.classList.add('emoji')
+        }
     })
+}
+
+allPlayerEmojiButtons.forEach( button => {
+    button.addEventListener('click', handlePlayerEmojiClicks) 
 })

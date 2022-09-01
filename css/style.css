@@ -19,14 +19,25 @@ button {
     background-color: inherit;
 }
 
-span.emoji {
+.emoji {
     font-size: 100px;
     display: inline-block;
     text-shadow: 3px 3px 4px black;
 }
 
-span.emoji:hover {
+.emoji:hover {
     text-shadow: 3px 3px 4px white;
+}
+
+.player-choice {
+    font-size: 100px;
+    display: inline-block;
+    text-shadow: 3px 3px 4px red;
+}
+
+/* Highlights the emoji chosen by the computer */
+.computer-choice {
+    text-shadow: 3px 3px 4px blue;
 }
 
 /* Applied to the match result text */
@@ -48,8 +59,8 @@ span.emoji:hover {
     align-items: center;
 }
 
-.player,
-.computer {
+.player-container,
+.computer-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
