@@ -2,7 +2,7 @@
 
 <p align=center>
 
-    ![Screenshot](images/demo.png)
+    ![Screenshot](./images/demo.png)
     
 </p> 
 
