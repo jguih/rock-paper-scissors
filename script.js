@@ -66,12 +66,13 @@ const handlePlayerEmojiClicks = function() {
     // Gets the player and computer choice
     const playerChoice = this.dataset.key
     const computerChoice = getComputerChoice()
+    // Plays the round and stores the match result
     const matchResult = playRound(playerChoice, computerChoice)
     // Gets the span that contains the button's emoji
     const thisButtonEmoji = this.firstChild
     
     showComputerChoice(computerChoice)
-    showResult(matchResult)
+    showResult(matchResult[1])
     updateScore(matchResult)
 
     // Highlights the selected emoji
@@ -120,8 +121,8 @@ const match_result = document.querySelector('.match-result')
 match_result.appendChild(result)
 
 // Update the h3 that displays the result
-function showResult(matchResult) {
-    result.textContent = matchResult[1]
+function showResult(newResult) {
+    result.textContent = newResult
 }
 
 // Store computer and player score
@@ -142,11 +143,27 @@ function score(matchResult) {
     }
 }
 
+const playerScoreNode = document.querySelector('.player-score')
+const computerScoreNode = document.querySelector('.computer-score')
 // Update the score on screen
 function updateScore(matchResult) {
     score(matchResult)
-    const playerScoreNode = document.querySelector('.player-score')
-    const computerScoreNode = document.querySelector('.computer-score')
     playerScoreNode.textContent = playerScore
     computerScoreNode.textContent = computerScore
+
+    if(playerScore === 5) {
+        confirm('You Won!\nPlayer Score: '+playerScore+'\nComputer Score: '+computerScore)
+        resetScore()
+    } else if (computerScore === 5) {
+        confirm('You Lost!\nPlayer Score: '+playerScore+'\nComputer Score: '+computerScore)
+        resetScore()
+    }
+    
+    playerScoreNode.textContent = playerScore
+    computerScoreNode.textContent = computerScore
+}
+
+function resetScore() {
+    playerScore = 0
+    computerScore = 0
 }
